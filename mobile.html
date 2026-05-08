@@ -28,13 +28,22 @@
    BODY
 ========================= */
 
-body{
+html, body{
+
   margin:0;
-  background:#111;
+  padding:0;
+
   overflow-x:hidden;
   overflow-y:auto;
-  font-family:Arial, Helvetica, sans-serif;
+
+  background:#174b55;
+
+  overscroll-behavior-y:none;
+
+  -webkit-overflow-scrolling:touch;
 }
+
+
 /* =========================
    MAIN CANVAS
 ========================= */
@@ -53,9 +62,10 @@ body{
   position:relative;
 
   width:100%;
+
   overflow:hidden;
 
-  background:#111;
+  background:#174b55;
 }
 /* =========================
    MAP
@@ -641,14 +651,23 @@ function scaleCanvas(){
   const canvas =
     document.getElementById("mainCanvas");
 
+  const viewport =
+    document.getElementById("viewport");
+
   const scale =
     window.innerWidth / 1080;
 
   canvas.style.transform =
     `scale(${scale})`;
 
-document.getElementById("viewport").style.minHeight =
-  (1920 * scale) + "px";
+  const scaledHeight =
+    1920 * scale;
+
+  viewport.style.height =
+    scaledHeight + "px";
+
+  document.body.style.height =
+    scaledHeight + "px";
 }
 
 window.addEventListener("resize", scaleCanvas);
